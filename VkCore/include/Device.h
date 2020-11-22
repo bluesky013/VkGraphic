@@ -4,43 +4,37 @@
 #include <optional>
 #include <vulkan/vulkan.h>
 
-#define DEBUG_LAYER
-
 namespace vkl {
+class Swapchain;
 
 class Device {
 public:
-    Device() : alloc(nullptr) {}
+    Device() {}
     ~Device() {}
 
-    void init();
+    Swapchain* createSwapchain(void* handle);
 
     struct QueueFamily {
         std::optional<uint32_t> graphics;
-        std::optional<uint32_t> present;
+        std::optional<uint32_t> transfer;
         std::optional<uint32_t> compute;
     };
 
-    struct PhysicalDevice {
-        VkPhysicalDevice devInfo;
-        std::vector<VkQueueFamilyProperties> props;
+    struct Queue {
+        VkQueue graphic;
+        VkQueue transfer;
+        VkQueue compute;
     };
 
+    struct Context {
+        VkPhysicalDevice phyDev;
+        QueueFamily queueFamily;
+        VkDevice device;
+        Queue queues;
+    };
 private:
-    void CreateInstance();
-    void InitPhyDevices();
-    void CreateDevice();
-
-    VkInstance instance;
-    VkPhysicalDevice phyDev;
-    VkDevice dev;
-    std::vector<VkLayerProperties> layers;
-    std::vector<PhysicalDevice> phyDevs;
-#ifdef DEBUG_LAYER
-    VkDebugUtilsMessengerEXT debugMessenger;
-#endif
-    VkAllocationCallbacks *alloc;
-    QueueFamily queueFamily;
+    friend class VInstance;
+    Context context;
 };
 
 }

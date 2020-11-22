@@ -1,7 +1,7 @@
 project(VkCore)
 
 find_package(VULKAN)
-option(DEBUG_LAYER "option for Vulkan DebugLayer" ON)
+option(VKL_DEBUG_LAYER "option for Vulkan DebugLayer" ON)
 
 file(GLOB VK_CORE_SRC
     include/*

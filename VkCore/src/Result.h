@@ -4,7 +4,7 @@
 #include <stdexcept>
 #include <vulkan/vulkan.h>
 
-inline void CheckRst(const VkResult& rst)
+inline void CHECK_RST(const VkResult& rst)
 {
     if (rst != VK_SUCCESS) {
         throw std::runtime_error("check result error");
