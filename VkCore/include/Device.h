@@ -6,13 +6,14 @@
 
 namespace vkl {
 class Swapchain;
+struct SwapChainInfo;
 
 class Device {
 public:
     Device() {}
     ~Device() {}
 
-    Swapchain* createSwapchain(void* handle);
+    Swapchain* createSwapchain(void* handle, const SwapChainInfo& info);
 
     struct QueueFamily {
         std::optional<uint32_t> graphics;
@@ -32,8 +33,6 @@ public:
         VkDevice device;
         Queue queues;
     };
-private:
-    friend class VInstance;
     Context context;
 };
 

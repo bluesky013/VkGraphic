@@ -190,7 +190,12 @@ VInstance* g_instance = nullptr;
 std::mutex g_mutex;
 VInstance* VInstance::getInstance()
 {
-    return nullptr;
+    std::lock_guard<std::mutex> lock(g_mutex);
+    if (g_instance == nullptr) {
+        g_instance = new VInstance();
+        g_instance->init();
+    }
+    return g_instance;
 }
 
 }

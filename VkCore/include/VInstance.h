@@ -21,21 +21,19 @@ public:
     Device* createDevice(uint32_t index);
 
     static VkAllocationCallbacks* alloc;
+    VkInstance instance;
 private:
     VInstance()
         : instance(VK_NULL_HANDLE)
 #ifdef VKL_DEBUG_LAYER
-         ,debugMessenger(VK_NULL_HANDLE)
+        , debugMessenger(VK_NULL_HANDLE)
 #endif
     {}
     ~VInstance() {}
 
     void init();
-
     void createInstance();
     void initPhyDevices();
-
-    VkInstance instance;
 #ifdef VKL_DEBUG_LAYER
     VkDebugUtilsMessengerEXT debugMessenger;
 #endif

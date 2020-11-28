@@ -3,10 +3,13 @@
 
 namespace vkl {
 
-Swapchain* Device::createSwapchain(void* handle)
+Swapchain* Device::createSwapchain(void* handle, const SwapChainInfo& info)
 {
 	Swapchain* swc = new Swapchain(*this);
-	swc->init(handle);
+	if (!swc->init(handle, info)) {
+		delete swc;
+		return nullptr;
+	}
 	return swc;
 }
 

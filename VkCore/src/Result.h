@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <vulkan/vulkan.h>
 
+
 inline void CHECK_RST(const VkResult& rst)
 {
     if (rst != VK_SUCCESS) {

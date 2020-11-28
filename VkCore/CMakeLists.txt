@@ -3,6 +3,8 @@ project(VkCore)
 find_package(VULKAN)
 option(VKL_DEBUG_LAYER "option for Vulkan DebugLayer" ON)
 
+add_definitions(-DNOMINMAX)
+
 file(GLOB VK_CORE_SRC
     include/*
     src/*
